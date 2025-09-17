@@ -15,7 +15,7 @@ templates = Jinja2Templates(directory="templates")
 # 🚦 SAFE AZURE TABLE INITIALIZATION
 # ================================
 
-connection_string = os.getenv("DefaultEndpointsProtocol=https;AccountName=fastapitablestorage;AccountKey=/TyG09AjgJNPlYpCx4MwaVB8V4UvplEhKkpS8x7bmtXjk//PJebr0XgOKsE+mbEwiRUNXzCvc6ek+AStC3uqYA==;EndpointSuffix=core.windows.net")
+connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
 table_client = None  # Default to None — we'll try to initialize below
 
 if not connection_string:
@@ -135,4 +135,5 @@ if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))  # Azure sets PORT, fallback to 8000 locally
     uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
+
 
