@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+azure-data-tables
+python-dotenv
+jinja2
