@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FastAPI Azure Table App</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        form { margin-bottom: 30px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        input, button { padding: 8px; margin: 5px; }
+        .result { background: #f0f0f0; padding: 15px; border-radius: 5px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h2>💾 Save User Data</h2>
+    <form method="POST" action="/save_user">
+        <input type="text" name="user_id" placeholder="User ID (e.g., user123)" required />
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="text" name="phone" placeholder="Phone Number" required />
+        <input type="text" name="address" placeholder="Address" required />
+        <button type="submit">Save User</button>
+    </form>
+
+    <hr>
+
+    <h2>🔍 Retrieve User Data</h2>
+    <form method="GET" action="/get_user">
+        <input type="text" name="user_id" placeholder="Enter User ID to Search" required />
+        <button type="submit">Get Data</button>
+    </form>
+
+    {% if saved %}
+        <div class="result" style="color: green;">✅ User saved: {{ saved }}</div>
+    {% endif %}
+
+    {% if data %}
+        <div class="result">
+            <h3>📄 Retrieved Data:</h3>
+            <p><strong>User ID:</strong> {{ data['RowKey'] }}</p>
+            <p><strong>Name:</strong> {{ data['Name'] }}</p>
+            <p><strong>Phone:</strong> {{ data['Phone'] }}</p>
+            <p><strong>Address:</strong> {{ data['Address'] }}</p>
+        </div>
+    {% elif error %}
+        <div class="result" style="color: red;">❌ {{ error }}</div>
+    {% endif %}
+
+</body>
+</html>
